@@ -5,10 +5,6 @@ const otpGenerator = require("otp-generator")
 const Otp = require('../model/Otp')
 const twilio = require("twilio")
 const sendSms = require("../sms")
-
-
-
-
 const userRoute = express.Router()
 
 userRoute.post('/signup', async (req, res) => {
@@ -108,6 +104,11 @@ userRoute.post("/verifyotp", async (req, res) => {
         meassage: err
     })
   }    
+})
+
+userRoute.get('/get', async(req, res) => {
+    const user = await User.find()
+    res.send(user)
 })
 
 module.exports = userRoute;
