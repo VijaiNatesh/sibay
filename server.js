@@ -3,14 +3,18 @@ const dotenv = require("dotenv").config()
 const cors = require("cors")
 
 const mongoose = require("mongoose")
+mongoose.set('strictQuery', true);
 const userRoute = require("./routes/userRoute")
 //const fileRoute = require("./routes/fileRoute")
 //const blogRoute = require("./routes/blogRoute")
 
-mongoose.connect(process.env.MONGO_URL, ()=> {
+mongoose.connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+   useUnifiedTopology: true
+}, ()=> {
     console.log("DB Connected")
 })
-mongoose.set('strictQuery', false);
+
 
 const app = express()
 app.use(cors())
